@@ -1,0 +1,4 @@
+File name:File1
+System:Windows10.0.18362
+User name:Serg
+File system encoding:utf-8

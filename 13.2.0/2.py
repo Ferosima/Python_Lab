@@ -108,6 +108,18 @@ class TreeNode:
         # need stop
         return operation(self.data, self.left,self.right)
 
+    def number_of_node(self):
+        if isinstance(self.right, TreeNode):
+          a=self.right.number_of_node()+1
+        else:
+            a= 1
+        if isinstance(self.left, TreeNode):
+            b= self.left.number_of_node()+1
+        else:
+            b= 1
+        return a+b
+
+
 
 def is_number(str):
     try:
@@ -285,9 +297,11 @@ a=input("Вводите, пожайлуста, без лишних скобок�
 #a="1+2*(3-4)"
 c = str_to_TreeNode(a, 400, 300)
 if isinstance(c, TreeNode):
+    print("Количество узлов: ",c.number_of_node()+1)
     print(c.call())
     print("я там даже дерево построил), откройте tk")
 else:
     print(c)
+
 canv.pack()
 root.mainloop()

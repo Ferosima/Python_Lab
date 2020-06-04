@@ -2,6 +2,11 @@
 # (дочірніми вершинами), вони, в свою чергу, - зі своїми дочірніми вершинами, і так далі до об'єктів, властивості Left і Right
 # яких рівні null (у деяких вершин може дорівнювати null одна з властивостей - Left або Right).
 # Вивести кількість вершин дерева.
+
+#7. Даний корінь A1 непорожнього дерева. Вивести максимальне з значень його вершин і
+# кількість вершин, що мають це максимальне значення.
+
+#12. Даниц корінь A1 непорожнього дерева. Створити копію даного дерева і вивести посилання A2 на корінь створеної копії
 from tkinter import *
 
 root = Tk()
@@ -10,8 +15,8 @@ canv = Canvas(root, width=w, height=h, bg='white')
 list_symbol_one = ['*', '/']
 list_symbol_two = ['+', '-', ]
 list_all_symbol = ['+', '-', '*', '/', ]
-
-
+global max
+max=0
 def operation(a, b, c=int):
     b = int(b)
     c = int(c)
@@ -118,7 +123,6 @@ class TreeNode:
         else:
             b= 1
         return a+b
-
 
 
 def is_number(str):
@@ -292,13 +296,60 @@ def str_to_TreeNode(a, x, y):
                 return b
     return b
 
+m=0
+def max(self:TreeNode):
+    global m
+    if isinstance(self.right, TreeNode):
+        max(self.right)
+    else:
+        if m < int(self.right):
+            m = int(self.right)
+    if isinstance(self.left, TreeNode):
+        max(self.left)
+    else:
+        if m< int(self.left):
+            m = int(self.left)
+
+number_m=0
+def number_max(self:TreeNode):
+    global number_m
+    if isinstance(self.right, TreeNode):
+        number_max(self.right)
+    else:
+        if m == int(self.right):
+            number_m+=1
+    if isinstance(self.left, TreeNode):
+        number_max(self.left)
+    else:
+        if m== int(self.left):
+            number_m+=1
+#12
+def copy_Tree(tree:TreeNode):
+ tree_two=TreeNode()
+ tree_two.data=tree.data
+ if isinstance(tree.right,TreeNode):
+     tree_two.right=copy_Tree(tree.right)
+ else:
+     tree_two.right=tree.right
+ if isinstance(tree.left,TreeNode):
+     tree_two.left=copy_Tree(tree.left)
+ else:
+     tree_two.left=tree.left
+ return tree_two
+
 #a = "(1+-1)*(1*1)"
 a=input("Вводите, пожайлуста, без лишних скобокб и не забывайте их закрывать,\nотрицательные числа берите в скобки(так должно работать лучше)\n")
 #a="1+2*(3-4)"
 c = str_to_TreeNode(a, 400, 300)
 if isinstance(c, TreeNode):
-    print("Количество узлов: ",c.number_of_node()+1)
-    print(c.call())
+    print("2.Количество узлов: ",c.number_of_node()+1)
+    max(c)
+    number_max(c)
+    print("7.Максимальный элемент дерева: ",m)
+    print("7.Кількість максимальних елементів: ",number_m)
+    #12
+    c_2=copy_Tree(c)
+    print("Відповідь: ",c.call())
     print("я там даже дерево построил), откройте tk")
 else:
     print(c)
